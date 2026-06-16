@@ -2,6 +2,17 @@ name: Generate note draft
 
 on:
   workflow_dispatch:
+    inputs:
+      memo:
+        description: "Memo from Slack"
+        required: false
+        default: ""
+      platforms:
+        description: "Platform selection (note/instagram/x/all)"
+        required: false
+        default: "all"
+  repository_dispatch:
+    types: [generate-note]
   schedule:
     - cron: "0 0 * * *" # Japan time 09:00
 
@@ -12,8 +23,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show guidance
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Generate posts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          INPUT_MEMO: ${{ github.event.inputs.memo || github.event.client_payload.memo || '' }}
+          INPUT_PLATFORMS: ${{ github.event.inputs.platforms || github.event.client_payload.platforms || 'all' }}
+        run: python scripts/generate_posts.py
+
+      - name: Commit and push generated files
         run: |
-          echo "This workflow is a placeholder for future AI note generation."
-          echo "Next step: add an OpenAI API key to GitHub Secrets and connect a script."
-          echo "For now, use prompts/hiro_note_prompt.md with Cursor or Codex."
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add drafts/
+          git diff --cached --quiet || git commit -m "feat: auto-generate posts $(date +'%Y-%m-%d')"
+          git push
+
+      - name: Notify Slack
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          STATUS="${{ job.status }}"
+          if [ "$STATUS" = "success" ]; then
+            MESSAGE="✅ 記事生成が完了しました ($(date +'%Y-%m-%d'))"
+          else
+            MESSAGE="❌ 記事生成に失敗しました ($(date +'%Y-%m-%d'))"
+          fi
+          curl -s -X POST -H 'Content-type: application/json' \
+            --data "{\"text\": \"$MESSAGE\"}" \
+            "$SLACK_WEBHOOK_URL"
