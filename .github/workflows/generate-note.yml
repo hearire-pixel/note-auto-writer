@@ -1,0 +1,19 @@
+name: Generate note draft
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # Japan time 09:00
+
+jobs:
+  generate-note:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show guidance
+        run: |
+          echo "This workflow is a placeholder for future AI note generation."
+          echo "Next step: add an OpenAI API key to GitHub Secrets and connect a script."
+          echo "For now, use prompts/hiro_note_prompt.md with Cursor or Codex."
