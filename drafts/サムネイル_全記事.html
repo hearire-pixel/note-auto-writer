@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サムネイル集｜HIRO X記事</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+      background: #111;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+    h2 { color: #fff; font-size: 13px; letter-spacing: 0.2em; opacity: 0.5; margin-bottom: -40px; }
+
+    /* ===== 共通サムネイル ===== */
+    .thumb {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .bg { position: absolute; inset: 0; }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+    .content {
+      position: absolute;
+      inset: 0;
+      padding: 55px 75px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+    .title-main {
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .title-sub {
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 32px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 7px;
+      padding: 7px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .big-num {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 220px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      pointer-events: none;
+    }
+    .bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6b3fa0, #e8c97a, #1a6b8a);
+    }
+    .sig {
+      position: absolute;
+      bottom: 22px; right: 55px;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+    }
+
+    /* ===== 記事①：病院の朝 ===== */
+    #a01 .bg { background: linear-gradient(135deg, #0a1628 0%, #1a2840 50%, #0d1520 100%); }
+    #a01 .orb1 { width: 450px; height: 450px; background: #1a4a8a; top: -80px; left: -80px; opacity: 0.4; }
+    #a01 .orb2 { width: 350px; height: 350px; background: #4a1a6a; bottom: -60px; right: 200px; opacity: 0.3; }
+    #a01 .badge { color: #7ab8e8; border-color: rgba(122,184,232,0.5); background: rgba(122,184,232,0.1); }
+    #a01 .title-main { font-size: 54px; color: #fff; }
+    #a01 .hl { color: #7ab8e8; }
+    #a01 .title-sub { font-size: 30px; color: rgba(255,255,255,0.75); }
+    #a01 .tag { color: rgba(255,255,255,0.65); }
+    #a01 .big-num { color: rgba(255,255,255,0.035); }
+    #a01 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事③：もう無理 ===== */
+    #a03 .bg { background: linear-gradient(135deg, #1a0a0a 0%, #2a1020 50%, #0d0a18 100%); }
+    #a03 .orb1 { width: 500px; height: 500px; background: #8a1a3a; top: -100px; left: -80px; opacity: 0.35; }
+    #a03 .orb2 { width: 380px; height: 380px; background: #3a1a6a; bottom: -60px; right: -60px; opacity: 0.3; }
+    #a03 .badge { color: #e87a9a; border-color: rgba(232,122,154,0.5); background: rgba(232,122,154,0.1); }
+    #a03 .title-main { font-size: 52px; color: #fff; }
+    #a03 .hl { color: #e87a9a; }
+    #a03 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a03 .tag { color: rgba(255,255,255,0.65); }
+    #a03 .big-num { color: rgba(255,255,255,0.03); }
+    #a03 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事④：自然の気づき ===== */
+    #a04 .bg { background: linear-gradient(135deg, #0a1a0a 0%, #102a10 50%, #0a180a 100%); }
+    #a04 .orb1 { width: 480px; height: 480px; background: #1a6a2a; top: -90px; left: -70px; opacity: 0.4; }
+    #a04 .orb2 { width: 350px; height: 350px; background: #3a6a1a; bottom: -60px; right: -50px; opacity: 0.3; }
+    #a04 .badge { color: #7ae87a; border-color: rgba(122,232,122,0.5); background: rgba(122,232,122,0.1); }
+    #a04 .title-main { font-size: 50px; color: #fff; }
+    #a04 .hl { color: #9ae87a; }
+    #a04 .title-sub { font-size: 27px; color: rgba(255,255,255,0.75); }
+    #a04 .tag { color: rgba(255,255,255,0.65); }
+    #a04 .big-num { color: rgba(255,255,255,0.03); }
+    #a04 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑤：癒しの時間 ===== */
+    #a05 .bg { background: linear-gradient(135deg, #1a140a 0%, #2a1e0a 50%, #180e0a 100%); }
+    #a05 .orb1 { width: 460px; height: 460px; background: #8a6a1a; top: -80px; left: -70px; opacity: 0.35; }
+    #a05 .orb2 { width: 360px; height: 360px; background: #6a3a1a; bottom: -60px; right: -50px; opacity: 0.3; }
+    #a05 .badge { color: #e8c97a; border-color: rgba(232,201,122,0.5); background: rgba(232,201,122,0.1); }
+    #a05 .title-main { font-size: 52px; color: #fff; }
+    #a05 .hl { color: #e8c97a; }
+    #a05 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a05 .tag { color: rgba(255,255,255,0.65); }
+    #a05 .big-num { color: rgba(255,255,255,0.03); }
+    #a05 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑥：病気でわかったこと ===== */
+    #a06 .bg { background: linear-gradient(135deg, #0a1018 0%, #102028 50%, #080e18 100%); }
+    #a06 .orb1 { width: 460px; height: 460px; background: #1a4a7a; top: -80px; left: -70px; opacity: 0.38; }
+    #a06 .orb2 { width: 350px; height: 350px; background: #1a2a6a; bottom: -60px; right: -50px; opacity: 0.3; }
+    #a06 .badge { color: #7ab0e8; border-color: rgba(122,176,232,0.5); background: rgba(122,176,232,0.1); }
+    #a06 .title-main { font-size: 50px; color: #fff; }
+    #a06 .hl { color: #7ab0e8; }
+    #a06 .title-sub { font-size: 27px; color: rgba(255,255,255,0.75); }
+    #a06 .tag { color: rgba(255,255,255,0.65); }
+    #a06 .big-num { color: rgba(255,255,255,0.03); }
+    #a06 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑦：朝のルーティン ===== */
+    #a07 .bg { background: linear-gradient(135deg, #1a1400 0%, #2a2200 50%, #181000 100%); }
+    #a07 .orb1 { width: 460px; height: 460px; background: #8a7a00; top: -80px; left: -70px; opacity: 0.35; }
+    #a07 .orb2 { width: 360px; height: 360px; background: #6a5a00; bottom: -60px; right: -50px; opacity: 0.28; }
+    #a07 .badge { color: #f0d878; border-color: rgba(240,216,120,0.5); background: rgba(240,216,120,0.1); }
+    #a07 .title-main { font-size: 52px; color: #fff; }
+    #a07 .hl { color: #f0d878; }
+    #a07 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a07 .tag { color: rgba(255,255,255,0.65); }
+    #a07 .big-num { color: rgba(255,255,255,0.03); }
+    #a07 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑧：苦しみに光 ===== */
+    #a08 .bg { background: linear-gradient(135deg, #100a1a 0%, #1a1030 50%, #0a0812 100%); }
+    #a08 .orb1 { width: 480px; height: 480px; background: #5a1a9a; top: -90px; left: -80px; opacity: 0.38; }
+    #a08 .orb2 { width: 360px; height: 360px; background: #8a1a6a; bottom: -60px; right: -50px; opacity: 0.28; }
+    #a08 .badge { color: #c07ae8; border-color: rgba(192,122,232,0.5); background: rgba(192,122,232,0.1); }
+    #a08 .title-main { font-size: 52px; color: #fff; }
+    #a08 .hl { color: #c07ae8; }
+    #a08 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a08 .tag { color: rgba(255,255,255,0.65); }
+    #a08 .big-num { color: rgba(255,255,255,0.03); }
+    #a08 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑨：祈りと言葉 ===== */
+    #a09 .bg { background: linear-gradient(135deg, #0a0a1a 0%, #101028 50%, #080810 100%); }
+    #a09 .orb1 { width: 460px; height: 460px; background: #2a1a7a; top: -80px; left: -70px; opacity: 0.4; }
+    #a09 .orb2 { width: 360px; height: 360px; background: #1a2a8a; bottom: -60px; right: -50px; opacity: 0.3; }
+    #a09 .badge { color: #9a9ae8; border-color: rgba(154,154,232,0.5); background: rgba(154,154,232,0.1); }
+    #a09 .title-main { font-size: 52px; color: #fff; }
+    #a09 .hl { color: #b0b0f0; }
+    #a09 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a09 .tag { color: rgba(255,255,255,0.65); }
+    #a09 .big-num { color: rgba(255,255,255,0.03); }
+    #a09 .sig { color: rgba(255,255,255,0.35); }
+
+    /* ===== 記事⑩：体験を芸術に ===== */
+    #a10 .bg { background: linear-gradient(135deg, #1a0a0a 0%, #281010 50%, #100808 100%); }
+    #a10 .orb1 { width: 480px; height: 480px; background: #8a2a1a; top: -90px; left: -80px; opacity: 0.38; }
+    #a10 .orb2 { width: 360px; height: 360px; background: #6a1a0a; bottom: -60px; right: -50px; opacity: 0.28; }
+    #a10 .badge { color: #e8a07a; border-color: rgba(232,160,122,0.5); background: rgba(232,160,122,0.1); }
+    #a10 .title-main { font-size: 52px; color: #fff; }
+    #a10 .hl { color: #e8a07a; }
+    #a10 .title-sub { font-size: 28px; color: rgba(255,255,255,0.75); }
+    #a10 .tag { color: rgba(255,255,255,0.65); }
+    #a10 .big-num { color: rgba(255,255,255,0.03); }
+    #a10 .sig { color: rgba(255,255,255,0.35); }
+  </style>
+</head>
+<body>
+
+<!-- ① -->
+<h2>▼ 記事①｜病院へ行く朝にやっていること3つ</h2>
+<div class="thumb" id="a01">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">HIRO の実話</div>
+    <div class="title-main"><span class="hl">病院</span>へ行く朝に<br>やっていること<span class="hl">3つ</span></div>
+    <div class="title-sub">怖くても動ける自分のつくり方</div>
+    <div class="tags">
+      <div class="tag">✦ 前日夜にメモを書く</div>
+      <div class="tag">✦ 窓を開けて空気を吸う</div>
+      <div class="tag">✦「今日だけ」と声に出す</div>
+    </div>
+  </div>
+  <div class="big-num">3</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ③ -->
+<h2>▼ 記事③｜「もう無理」と思った日から立ち直れた理由</h2>
+<div class="thumb" id="a03">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">HIRO の体験談</div>
+    <div class="title-main"><span class="hl">「もう無理」</span>と思った日から<br>立ち直れた理由</div>
+    <div class="title-sub">命を諦めない　<span class="hl">4</span>つの思考法</div>
+    <div class="tags">
+      <div class="tag">✦ 全部紙に書き出す</div>
+      <div class="tag">✦ でも、まだここにいる</div>
+      <div class="tag">✦ 1つだけ決める</div>
+      <div class="tag">✦ 誰かに伝える</div>
+    </div>
+  </div>
+  <div class="big-num">4</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ④ -->
+<h2>▼ 記事④｜自然の中に答えがある</h2>
+<div class="thumb" id="a04">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">自然からの気づき</div>
+    <div class="title-main">自然の中に<span class="hl">答え</span>がある</div>
+    <div class="title-sub">葉っぱ・木・光から受け取った　<span class="hl">7</span>つの気づき</div>
+    <div class="tags">
+      <div class="tag">🌿 鉢から葉が出た</div>
+      <div class="tag">🌳 嵐の後も根は残る</div>
+      <div class="tag">☀️ 光は毎日来る</div>
+      <div class="tag">🌸 花は誰かに見せようとして咲かない</div>
+    </div>
+  </div>
+  <div class="big-num">7</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑤ -->
+<h2>▼ 記事⑤｜癒しの時間を毎日つくる方法</h2>
+<div class="thumb" id="a05">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">毎日の習慣</div>
+    <div class="title-main"><span class="hl">癒し</span>の時間を<br>毎日つくる方法</div>
+    <div class="title-sub">忙しくても<span class="hl">余白</span>を守る　4つのルール</div>
+    <div class="tags">
+      <div class="tag">✦ スマホを裏返す5分</div>
+      <div class="tag">✦ 好きな飲み物をゆっくり飲む</div>
+      <div class="tag">✦ 何もしない時間を予定に書く</div>
+      <div class="tag">✦ 静かな瞬間を思い出す</div>
+    </div>
+  </div>
+  <div class="big-num">4</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑥ -->
+<h2>▼ 記事⑥｜病気になってわかったこと</h2>
+<div class="thumb" id="a06">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">HIRO の気づき</div>
+    <div class="title-main">病気になって<br><span class="hl">わかったこと</span></div>
+    <div class="title-sub">できないことより　<span class="hl">今できること</span>を見る生き方</div>
+    <div class="tags">
+      <div class="tag">✦ できないリストを閉じる</div>
+      <div class="tag">✦ 今日できること1つだけ</div>
+      <div class="tag">✦「よくやった」と言う</div>
+    </div>
+  </div>
+  <div class="big-num">3</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑦ -->
+<h2>▼ 記事⑦｜朝起きたら必ずやること5つ</h2>
+<div class="thumb" id="a07">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">毎朝のルーティン</div>
+    <div class="title-main">朝起きたら<br>必ずやること<span class="hl">5つ</span></div>
+    <div class="title-sub">今日を生きるための　小さなルーティン</div>
+    <div class="tags">
+      <div class="tag">✦「今日も生きている」と言う</div>
+      <div class="tag">✦ カーテンを開ける</div>
+      <div class="tag">✦ 白湯を飲む</div>
+      <div class="tag">✦ 鏡で自分の目を見る</div>
+    </div>
+  </div>
+  <div class="big-num">5</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑧ -->
+<h2>▼ 記事⑧｜苦しみの中に光を見つける練習</h2>
+<div class="thumb" id="a08">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">感情の言語化</div>
+    <div class="title-main">苦しみの中に<span class="hl">光</span>を<br>見つける練習</div>
+    <div class="title-sub">感情を<span class="hl">言語化</span>するだけで変わる理由</div>
+    <div class="tags">
+      <div class="tag">✦ 感じていることを言葉にする</div>
+      <div class="tag">✦「どんな感じ？」と深掘りする</div>
+      <div class="tag">✦ 感情に名前をつける</div>
+      <div class="tag">✦ まだ生きているから感じる</div>
+    </div>
+  </div>
+  <div class="big-num">4</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑨ -->
+<h2>▼ 記事⑨｜祈りと言葉の力</h2>
+<div class="thumb" id="a09">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">毎朝の言葉</div>
+    <div class="title-main"><span class="hl">祈り</span>と<span class="hl">言葉</span>の力</div>
+    <div class="title-sub">毎朝声に出している　3つのフレーズとその効果</div>
+    <div class="tags">
+      <div class="tag">✦「今日も生きている。それだけで十分」</div>
+      <div class="tag">✦「私の今日が誰かの明日の光に」</div>
+      <div class="tag">✦「今できることを見る」</div>
+    </div>
+  </div>
+  <div class="big-num">3</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+<!-- ⑩ -->
+<h2>▼ 記事⑩｜体験を芸術に変える方法</h2>
+<div class="thumb" id="a10">
+  <div class="bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="content">
+    <div class="badge">発信の本質</div>
+    <div class="title-main">体験を<span class="hl">芸術</span>に<br>変える方法</div>
+    <div class="title-sub">私がnoteを書き続ける　本当の理由</div>
+    <div class="tags">
+      <div class="tag">✦ 小さな出来事をメモする</div>
+      <div class="tag">✦ 感情を書き加える</div>
+      <div class="tag">✦ 気づきを一文で書く</div>
+      <div class="tag">✦ 誰かの役に立つかを問いかける</div>
+    </div>
+  </div>
+  <div class="big-num">4</div>
+  <div class="bar"></div>
+  <div class="sig">HIRO</div>
+</div>
+
+</body>
+</html>

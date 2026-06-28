@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>潜在意識書き換えワーク｜毎朝5分シート</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+      background: #faf8f5;
+      color: #3a3530;
+      line-height: 1.9;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 16mm 18mm;
+      background: #fff;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #c9b99a;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .header .sub {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #9e8e7a;
+      margin-bottom: 6px;
+    }
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #3a3530;
+      line-height: 1.5;
+    }
+    .header .tagline {
+      font-size: 11px;
+      color: #9e8e7a;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* 日付・名前 */
+    .meta-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+    .meta-box {
+      flex: 1;
+    }
+    .meta-box label {
+      font-size: 10px;
+      color: #9e8e7a;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .meta-box .line {
+      border-bottom: 1px solid #c9b99a;
+      height: 26px;
+    }
+
+    /* セクション共通 */
+    .section {
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #7a6a58;
+      background: #f5f0e8;
+      padding: 5px 10px;
+      border-left: 3px solid #c9b99a;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      color: #c9b99a;
+      font-size: 13px;
+    }
+
+    /* STEP1 口ぐせメモ */
+    .words-grid {
+      display: grid;
+      grid-template-columns: 1fr 24px 1fr;
+      gap: 8px 6px;
+      align-items: center;
+    }
+    .words-grid .col-label {
+      font-size: 10px;
+      color: #9e8e7a;
+      text-align: center;
+      letter-spacing: 0.1em;
+    }
+    .words-grid .arrow {
+      text-align: center;
+      color: #c9b99a;
+      font-size: 14px;
+    }
+    .input-line {
+      border-bottom: 1px solid #ddd3c4;
+      height: 28px;
+      width: 100%;
+    }
+
+    /* STEP3 感謝3行 */
+    .thanks-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .thanks-list li {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .thanks-list li .num {
+      font-size: 18px;
+      color: #c9b99a;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .thanks-list li .input-line {
+      flex: 1;
+    }
+
+    /* STEP4 現在形宣言 */
+    .affirmation-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .affirmation-list li {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .affirmation-list li .prefix {
+      font-size: 11px;
+      color: #9e8e7a;
+      flex-shrink: 0;
+      padding-bottom: 2px;
+    }
+    .affirmation-list li .input-line {
+      flex: 1;
+    }
+
+    /* STEP5 感情チェック */
+    .feeling-box {
+      border: 1px solid #ddd3c4;
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #fdf9f4;
+    }
+    .feeling-box p {
+      font-size: 11px;
+      color: #7a6a58;
+      margin-bottom: 8px;
+    }
+    .feeling-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .feeling-options label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #3a3530;
+      cursor: pointer;
+    }
+    .feeling-options input[type="checkbox"] {
+      accent-color: #c9b99a;
+    }
+    .feeling-box .free-line {
+      border-bottom: 1px solid #ddd3c4;
+      height: 26px;
+      width: 100%;
+    }
+
+    /* 今日の一言 */
+    .today-word {
+      border: 1px dashed #c9b99a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      min-height: 52px;
+      background: #fdf9f4;
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #ddd3c4;
+      font-size: 10px;
+      color: #b0a090;
+      line-height: 1.8;
+    }
+
+    /* 印刷設定 */
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; padding: 12mm 16mm; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="sub">HIRO｜命と光の部屋　毎朝ワークシート</div>
+    <h1>潜在意識書き換えワーク<br>毎朝5分シート</h1>
+    <div class="tagline">私の今日が、誰かの明日の光になりますように。</div>
+  </div>
+
+  <!-- 日付・気分 -->
+  <div class="meta-row">
+    <div class="meta-box">
+      <label>DATE ／ 日付</label>
+      <div class="line"></div>
+    </div>
+    <div class="meta-box">
+      <label>今の気分（10点満点）</label>
+      <div class="line"></div>
+    </div>
+    <div class="meta-box">
+      <label>今日の天気</label>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- STEP1 -->
+  <div class="section">
+    <div class="section-title"><span class="step-num">STEP 1 ｜</span> 今日の口ぐせ　→　上書き言葉</div>
+    <div class="words-grid">
+      <div class="col-label">今の言葉</div>
+      <div></div>
+      <div class="col-label">上書き言葉</div>
+
+      <div class="input-line"></div>
+      <div class="arrow">→</div>
+      <div class="input-line"></div>
+
+      <div class="input-line"></div>
+      <div class="arrow">→</div>
+      <div class="input-line"></div>
+
+      <div class="input-line"></div>
+      <div class="arrow">→</div>
+      <div class="input-line"></div>
+    </div>
+  </div>
+
+  <!-- STEP3 感謝 -->
+  <div class="section">
+    <div class="section-title"><span class="step-num">STEP 2 ｜</span> 今日の「よかったこと」3つ</div>
+    <ul class="thanks-list">
+      <li><span class="num">①</span><div class="input-line"></div></li>
+      <li><span class="num">②</span><div class="input-line"></div></li>
+      <li><span class="num">③</span><div class="input-line"></div></li>
+    </ul>
+  </div>
+
+  <!-- STEP4 現在形宣言 -->
+  <div class="section">
+    <div class="section-title"><span class="step-num">STEP 3 ｜</span> 今日の「私はすでに〇〇です」宣言</div>
+    <ul class="affirmation-list">
+      <li><span class="prefix">私は</span><div class="input-line"></div></li>
+      <li><span class="prefix">私は</span><div class="input-line"></div></li>
+      <li><span class="prefix">私は</span><div class="input-line"></div></li>
+    </ul>
+  </div>
+
+  <!-- STEP5 感情チェック -->
+  <div class="section">
+    <div class="section-title"><span class="step-num">STEP 4 ｜</span> 宣言を読んだあと、感じた感覚</div>
+    <div class="feeling-box">
+      <p>あてはまるものに ✓ を入れてください</p>
+      <div class="feeling-options">
+        <label><input type="checkbox"> 胸が温かくなった</label>
+        <label><input type="checkbox"> 体が少し軽くなった</label>
+        <label><input type="checkbox"> 安心した</label>
+        <label><input type="checkbox"> 穏やかな気持ち</label>
+        <label><input type="checkbox"> よくわからなかった（それでもOK）</label>
+      </div>
+      <p>感じたことを自由に書いてください</p>
+      <div class="free-line"></div>
+    </div>
+  </div>
+
+  <!-- 今日の一言 -->
+  <div class="section">
+    <div class="section-title">✦ 今日の自分への一言</div>
+    <div class="today-word"></div>
+  </div>
+
+  <!-- フッター -->
+  <div class="footer">
+    HIRO｜命と光の部屋<br>
+    このシートは個人利用・印刷自由です。無断転載・販売はご遠慮ください。<br>
+    私の今日が、誰かの明日の光になりますように。
+  </div>
+
+</div>
+</body>
+</html>

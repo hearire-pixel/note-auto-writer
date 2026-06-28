@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サムネイル｜潜在意識を書き換えると何が変わるのか</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+      font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-align: center;
+      opacity: 0.6;
+      margin-bottom: -20px;
+    }
+
+    /* ==================== メインサムネイル ==================== */
+    .thumb {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* 背景グラデーション */
+    .thumb-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 40%, #0d1a2e 100%);
+    }
+
+    /* 光の粒エフェクト */
+    .light-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+    }
+    .orb1 { width: 500px; height: 500px; background: #6b3fa0; top: -100px; left: -100px; }
+    .orb2 { width: 400px; height: 400px; background: #1a6b8a; bottom: -80px; right: -80px; }
+    .orb3 { width: 300px; height: 300px; background: #c9a96e; top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0.15; }
+
+    /* コンテンツ */
+    .thumb-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+    }
+
+    /* 上部ラベル */
+    .label-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .label-badge {
+      background: rgba(201,169,110,0.25);
+      border: 1px solid rgba(201,169,110,0.6);
+      color: #e8c97a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+    .label-num {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+    }
+
+    /* メインコピー */
+    .main-copy {
+      margin-bottom: 28px;
+    }
+    .main-copy .line1 {
+      font-size: 52px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .main-copy .highlight {
+      color: #e8c97a;
+      position: relative;
+      display: inline-block;
+    }
+    .main-copy .line2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+
+    /* サブコピー */
+    .sub-copy {
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      margin-bottom: 40px;
+    }
+
+    /* 5つの変化バッジ */
+    .changes-row {
+      display: flex;
+      gap: 10px;
+    }
+    .change-badge {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .change-badge .icon {
+      color: #e8c97a;
+      margin-right: 4px;
+    }
+
+    /* 右側：数字ビジュアル */
+    .num-visual {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .num-visual .big-num {
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* 下部ライン */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6b3fa0, #e8c97a, #1a6b8a);
+    }
+
+    /* HIRO署名 */
+    .hiro-sig {
+      position: absolute;
+      bottom: 28px;
+      right: 60px;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+    }
+
+    /* ==================== 正方形サムネイル（Instagram等） ==================== */
+    .thumb-sq {
+      width: 600px;
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .thumb-sq .thumb-bg {
+      background: linear-gradient(160deg, #0d0d1a 0%, #1a1040 50%, #0d1a2e 100%);
+    }
+    .thumb-sq .orb1 { width: 400px; height: 400px; top: -80px; left: -80px; }
+    .thumb-sq .orb2 { width: 350px; height: 350px; bottom: -60px; right: -60px; }
+
+    .thumb-sq-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 40px;
+    }
+    .thumb-sq-content .sq-label {
+      background: rgba(201,169,110,0.25);
+      border: 1px solid rgba(201,169,110,0.6);
+      color: #e8c97a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .thumb-sq-content .sq-num {
+      font-size: 120px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+    }
+    .thumb-sq-content .sq-main {
+      font-size: 42px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .thumb-sq-content .sq-main em {
+      font-style: normal;
+      color: #e8c97a;
+    }
+    .thumb-sq-content .sq-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
+    }
+    .thumb-sq-content .sq-changes {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+    .thumb-sq-content .sq-change {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 7px 16px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .thumb-sq-content .sq-change .dot {
+      width: 6px; height: 6px;
+      background: #e8c97a;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .thumb-sq .bottom-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #6b3fa0, #e8c97a, #1a6b8a);
+    }
+    .thumb-sq .hiro-sig {
+      position: absolute;
+      bottom: 18px;
+      right: 24px;
+      color: rgba(255,255,255,0.35);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>▼ X / note 用サムネイル（横長 1200×630）</h2>
+
+  <!-- 横長サムネイル -->
+  <div class="thumb">
+    <div class="thumb-bg"></div>
+    <div class="light-orb orb1"></div>
+    <div class="light-orb orb2"></div>
+    <div class="light-orb orb3"></div>
+
+    <div class="thumb-content">
+      <div class="label-row">
+        <span class="label-badge">体験談</span>
+        <span class="label-num">HIRO の実話</span>
+      </div>
+
+      <div class="main-copy">
+        <div class="line1"><span class="highlight">潜在意識</span>を<br>書き換えると</div>
+        <div class="line2">何が変わるのか？</div>
+      </div>
+
+      <div class="sub-copy">私が体験した　5つの変化</div>
+
+      <div class="changes-row">
+        <div class="change-badge"><span class="icon">✦</span>怖いが「大丈夫」に</div>
+        <div class="change-badge"><span class="icon">✦</span>朝が楽しみになった</div>
+        <div class="change-badge"><span class="icon">✦</span>言葉が変わると周りが変わる</div>
+        <div class="change-badge"><span class="icon">✦</span>できることが見えてきた</div>
+        <div class="change-badge"><span class="icon">✦</span>誰かの光になれると思えた</div>
+      </div>
+    </div>
+
+    <div class="num-visual">
+      <div class="big-num">5</div>
+    </div>
+
+    <div class="bottom-bar"></div>
+    <div class="hiro-sig">HIRO</div>
+  </div>
+
+  <h2>▼ Instagram / X 正方形サムネイル（600×600）</h2>
+
+  <!-- 正方形サムネイル -->
+  <div class="thumb-sq">
+    <div class="thumb-bg"></div>
+    <div class="light-orb orb1"></div>
+    <div class="light-orb orb2"></div>
+
+    <div class="thumb-sq-content">
+      <div class="sq-num">5</div>
+      <div class="sq-label">HIRO の体験談</div>
+      <div class="sq-main"><em>潜在意識</em>を<br>書き換えると<br>何が変わるか？</div>
+      <div class="sq-sub">私が体験した　5つの変化</div>
+      <div class="sq-changes">
+        <div class="sq-change"><div class="dot"></div>怖いが「大丈夫」に変わった</div>
+        <div class="sq-change"><div class="dot"></div>朝が楽しみになった</div>
+        <div class="sq-change"><div class="dot"></div>言葉が変わると周りが変わる</div>
+        <div class="sq-change"><div class="dot"></div>今できることが見えてきた</div>
+        <div class="sq-change"><div class="dot"></div>誰かの光になれると思えた</div>
+      </div>
+    </div>
+
+    <div class="bottom-bar"></div>
+    <div class="hiro-sig">HIRO</div>
+  </div>
+
+</body>
+</html>
